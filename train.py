@@ -154,7 +154,7 @@ print(f"using device: {device}")
 num_return_sequences = 5
 max_length = 30
 
-enc = tiktoken.get_encoding('gpt-2')
+enc = tiktoken.get_encoding('gpt2')
 with open('input.txt', 'r') as f:
     text = f.read()
 
