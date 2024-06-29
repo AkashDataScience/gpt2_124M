@@ -195,6 +195,8 @@ class DataLoaderLite:
 
         return x, y
 
+torch.set_float32_matmul_precision('high')
+
 model = GPT(GPTConfig())
 model.to(device)
 
