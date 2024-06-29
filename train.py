@@ -2,6 +2,7 @@ import os
 import math
 import time
 import inspect
+import tiktoken
 from dataclasses import dataclass
 import torch
 import torch.nn as nn
@@ -143,7 +144,6 @@ class GPT(nn.Module):
         return model
     
 # model = GPT.from_pretrained('gpt2')
-model = GPT(GPTConfig())
 device = 'cpu'
 if torch.cuda.is_available():
     device = 'cuda'
@@ -154,15 +154,32 @@ print(f"using device: {device}")
 num_return_sequences = 5
 max_length = 30
 
-model.eval()
+enc = tiktoken.get_encoding('gpt-2')
+with open('input.txt', 'r') as f:
+    text = f.read()
+
+text = text[:1000]
+tokens = enc.encode(text)
+B, T = 4, 32
+buf = torch.tensor(tokens[:B*T + 1])
+buf = buf.to(device)
+x = buf[:-1].view(B, T)
+y = buf[1:].view(B, T)
+
+model = GPT(GPTConfig())
 model.to(device)
 
-import tiktoken
-enc = tiktoken.get_encoding('gpt2')
-tokens = enc.encode("Hello, I'm a language model,")
-tokens = torch.tensor(tokens, dtype= torch.long)
-tokens = tokens.unsqueeze(0).repeat(num_return_sequences, 1)
-x = tokens.to(device)
+optimizer = torch.optim.AdamW(model.parameters(), lr = 3e-4)
+for i in range(50):
+    optimizer.zero_grad()
+    logits, loss = model(x, y)
+    loss.backward()
+    optimizer.step()
+    print(f'step{i}, loss: {loss.item()}')
+
+print(loss)
+import sys
+sys.exit(0)
 
 torch.manual_seed(42)
 torch.cuda.manual_seed(42)
