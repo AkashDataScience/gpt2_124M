@@ -7,7 +7,7 @@ from dataclasses import dataclass
 import torch
 import torch.nn as nn
 from torch.nn import functional as F
-torch._dynamo.reset()
+#torch._dynamo.reset()
 
 class CausalSelfAttention(nn.Module):
 
@@ -81,7 +81,7 @@ class Block(nn.Module):
 @dataclass
 class GPTConfig:
     block_size: int = 1024 # max sequence length
-    vocab_size: int = 50257 # number of tokens: 50,000 BPE merges + 256 bytes tokens + 1 <|endoftext|> token
+    vocab_size: int = 50304 # number of tokens: 50,000 BPE merges + 256 bytes tokens + 1 <|endoftext|> token
     n_layer: int = 12 # number of layers
     n_head: int = 12 # number of heads
     n_embd: int = 768 # embedding dimension
@@ -245,7 +245,8 @@ torch.set_float32_matmul_precision('high')
 
 model = GPT(GPTConfig())
 model.to(device)
-model = torch.compile(model, fullgraph=True, backend="cudagraphs")
+model = torch.compile(model)
+#model = torch.compile(model, fullgraph=True, backend="cudagraphs")
 
 train_loader = DataLoaderLite(B = 16, T = 1024)
 
