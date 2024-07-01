@@ -247,7 +247,7 @@ model = GPT(GPTConfig())
 model.to(device)
 model = torch.compile(model, fullgraph=True, backend="cudagraphs")
 
-train_loader = DataLoaderLite(B = 8, T = 1024)
+train_loader = DataLoaderLite(B = 16, T = 1024)
 
 # NEW CODE
 import time
