@@ -7,7 +7,7 @@ from dataclasses import dataclass
 import torch
 import torch.nn as nn
 from torch.nn import functional as F
-#torch._dynamo.reset()
+torch._dynamo.reset()
 
 class CausalSelfAttention(nn.Module):
 
@@ -232,8 +232,6 @@ if torch.cuda.is_available():
 num_return_sequences = 5
 max_length = 30
 
-
-
 import tiktoken
 
 class DataLoaderLite:
@@ -270,8 +268,8 @@ torch.set_float32_matmul_precision('high')
 
 model = GPT(GPTConfig())
 model.to(device)
-model = torch.compile(model)
-#model = torch.compile(model, fullgraph=True, backend="cudagraphs")
+#model = torch.compile(model)
+model = torch.compile(model, fullgraph=True, backend="cudagraphs")
 
 max_lr = 6e-4
 min_lr = max_lr * 0.1
