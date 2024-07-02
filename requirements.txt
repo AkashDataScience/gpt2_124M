@@ -12,11 +12,11 @@ pure-eval==0.2.2
 regex==2024.5.15
 stack-data==0.6.3
 tiktoken==0.7.0
-torch==2.3.0+cu121
-torchaudio==2.3.0+cu121
+torch==2.3.0
+torchaudio==2.3.0
 torchmetrics==1.4.0.post0
 torchtext==0.18.0
-torchvision==0.18.0+cu121
+torchvision==0.18.0
 transformers==4.42.3
 urllib3==2.2.1
 wcwidth==0.2.13
