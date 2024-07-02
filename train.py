@@ -312,8 +312,8 @@ for step in range(max_steps):
     tokens_per_sec = (train_loader.B * train_loader.T) / (t1 - t0)
     print(f'step{step} | loss: {loss.item()} | dt: {dt:.2f}ms | tok/sec: {tokens_per_sec: .2f} | norm: {norm:.2f}')
 
-
 print(loss)
+torch.save(model.state_dict(), 'model.pt')
 import sys; sys.exit(0)
 
 torch.manual_seed(42)
