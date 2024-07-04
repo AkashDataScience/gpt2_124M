@@ -85,7 +85,7 @@ Project Link - [ERA V2](https://github.com/AkashDataScience/ERA-V2/tree/master)
 This repo is developed using references listed below:
 * [Attention Is All You Need](https://arxiv.org/pdf/1706.03762)
 * [Language Models are Unsupervised Multitask Learners](https://d4mucfpksywv.cloudfront.net/better-language-models/language_models_are_unsupervised_multitask_learners.pdf)
-* [Language Models are Few-Shot Learners](https://arxiv.org/abs/2005.14165)
+* [Language Models are Few-Shot Learners](https://arxiv.org/pdf/2005.14165)
 
 
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
